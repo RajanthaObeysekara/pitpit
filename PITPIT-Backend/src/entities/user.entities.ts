@@ -7,20 +7,20 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ unique: true, nullable: false })
-    name: string
+    @Column({ unique: false, nullable: false })
+    name: string;
 
     @Column({ unique: true, nullable: false })
-    email: string
+    email: string;
 
-    @Column({ nullable: false })
-    password: string
+    @Column({nullable:false})
+    password: string;
 
-    @Column({ nullable: false })
-    access_token: string
+    @Column({nullable:true,default:null})
+    access_token: string;
 
-    @Column({ nullable: false })
-    refresh_token: string
+    @Column({nullable:true,default:null})
+    refresh_token: string;
 
     @OneToMany(type => Complex,complex => complex.user)
     complex: Complex[]
@@ -28,6 +28,6 @@ export class User {
     @BeforeInsert()
     async hashPassword(){
         // TODO Encrption
-        this.password = bcrypt.hash(this.password,10)
+        this.password = await bcrypt.hash(this.password,10)
     }
 }
