@@ -11,9 +11,7 @@ export class AuthController {
     constructor(
         private readonly authService: AuthService,
         private readonly userService: UserService
-    ) {
-
-    }
+    ) { }
 
     @Post('register')
     async register(@Body() createUserDto: CreateUserDto) {
@@ -28,14 +26,14 @@ export class AuthController {
 
     @UseGuards(RefreshGuard)
     @Post('refresh')
-    async refreshToken(@Request() req){
-        return this.authService.refreshToken(req.user)
+    async refreshToken(@Request() req) {
+        return await this.authService.refreshToken(req.user)
     }
 
     // this is a test route for check the JWT guard of the application
     @UseGuards(JwtGuard)
     @Post('guard')
-    async guard( @Request() request) {
+    async guard(@Request() request) {
         return request.user
     }
 }
