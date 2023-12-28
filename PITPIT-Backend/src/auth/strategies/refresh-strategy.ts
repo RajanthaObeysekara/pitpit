@@ -1,8 +1,8 @@
 import { PassportStrategy } from "@nestjs/passport";
-import { ExtractJwt, Strategy } from 'passport-jwt'
-import { UserService } from "src/user/user.service";
+import { ExtractJwt, Strategy } from 'passport-jwt';
+
 export class RefreshStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
-    constructor(private userService: UserService) {
+    constructor() {
         super({
             jwtFromRequest: ExtractJwt.fromBodyField("refresh"),
             ignoreExpiration: false,
